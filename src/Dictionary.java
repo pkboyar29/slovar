@@ -6,6 +6,8 @@ import java.util.Map;
 
 public abstract class Dictionary {
     final String valueAlphabet = "абвгдеёжзийклмнопрстуфхцчшщъыьэюяАБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ";
+    String keyAlphabet;
+    int keyLength;
     protected HashMap<String, String> dictionary = new HashMap<>();
     public abstract void load(String fileName) throws IOException; // загрузка словаря
     public void save(String fileName) throws IOException { // сохранение словаря
@@ -19,6 +21,8 @@ public abstract class Dictionary {
         return dictionary.get(key);
     }
     public abstract void put(String key, String value); // добавление записи с ключом (если ключ уже существует, то новая пара)
+    public abstract boolean checkKey(String key);
+    public abstract boolean checkValue(String value);
     public void remove(String key) { // удаление записи по ключу
         dictionary.remove(key);
     }

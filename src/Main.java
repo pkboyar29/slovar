@@ -58,7 +58,7 @@ public class Main {
     }
     static private void operateDictionary() {
         while (true) {
-            System.out.println("Выберите операцию: 1 - просмотреть содержимое словаря, 2 - добавить запись по ключу, 3 - удалить запись по ключу, 4 - найти запись по ключу, 0 - выход");
+            System.out.println("Выберите операцию: 1 - просмотреть содержимое словаря, 2 - добавить (изменить) запись по ключу, 3 - удалить запись по ключу, 4 - найти запись по ключу, 0 - выход");
             if (scanner.hasNextInt()) {
                 int choice = scanner.nextInt();
                 if (choice == 0) break;
@@ -74,13 +74,24 @@ public class Main {
         }
     }
     static private void addValue() {
-        System.out.println("Введите ключ:");
-        String key = scanner.next();
-        //scanner.nextLine();
-        System.out.println("Введите значение:");
-        String value = scanner.next();
-        //scanner.nextLine();
-
+        String key;
+        String value;
+        while (true) {
+            System.out.println("Введите ключ:");
+            key = scanner.next();
+            if (!dictionary.checkKey(key)) {
+                System.out.println("Ключ неверного формата");
+                continue;
+            }
+            System.out.println("Введите значение:");
+            value = scanner.next();
+            if (!dictionary.checkValue(value)) {
+                System.out.println("Значение неверного формата");
+                continue;
+            }
+            break;
+        }
+        System.out.println("Значение по ключу добавлено");
         dictionary.put(key, value);
 
         saveDictionary();
