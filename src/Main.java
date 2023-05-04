@@ -45,10 +45,12 @@ public class Main {
         fileName = scanner.nextLine();
 
         dictionary.load(fileName);
+        viewDictionary();
     }
     static private void viewDictionary() {
         String[] dictionaryString = dictionary.view();
 
+        //System.out.println("Содержимое словаря: ");
         for (String entry : dictionaryString) {
             String[] pair = entry.split(":");
             String key = pair[0];
@@ -101,7 +103,8 @@ public class Main {
         String key = scanner.next();
 
         dictionary.remove(key);
-
+        if (dictionary.get(key) == null) System.out.println("Значение удалено успешно");
+        else System.out.println("Значение не найдено");
         saveDictionary();
     }
     static private void findValue() {

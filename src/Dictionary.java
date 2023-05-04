@@ -3,9 +3,11 @@ import java.util.HashMap;
 import java.util.Map;
 
 public abstract class Dictionary {
-    final String valueAlphabet = "абвгдеёжзийклмнопрстуфхцчшщъыьэюяАБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ";
-    String keyAlphabet;
-    int keyLength;
+    //String valueAlphabet = "абвгдеёжзийклмнопрстуфхцчшщъыьэюяАБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ";
+    protected String valueAlphabet;
+    protected String keyAlphabet;
+    protected int keyLength;
+    protected int valueLength;
     protected HashMap<String, String> dictionary = new HashMap<>();
     public void load(String fileName) throws IOException { // загрузка словаря
         if (!fileName.endsWith(".txt")) throw new IOException("Некорректное расширение файла. Должно быть .txt");
@@ -42,9 +44,7 @@ public abstract class Dictionary {
     public boolean checkKey(String key) {
         return key.matches("[" + keyAlphabet + "]+") && key.length() == keyLength;
     }
-    public boolean checkValue(String value) {
-        return value.matches("[" + valueAlphabet + "]+");
-    }
+    public boolean checkValue(String value) { return value.matches("[" + valueAlphabet + "]+") && value.length() == valueLength; }
     public void remove(String key) { // удаление записи по ключу
         dictionary.remove(key);
     }
